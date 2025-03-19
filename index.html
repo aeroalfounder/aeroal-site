@@ -70,4 +70,31 @@
     </script>
 </body>
 </html>
+    <div class="news-container">
+        <h2>Новости AEROAL</h2>
+        <div class="news-slider">
+            <div class="news-item">✈️ AEROAL открывает новый маршрут в Шанхай (PVG)!</div>
+            <div class="news-item">🌍 Новое партнерство с международными авиакомпаниями!</div>
+            <div class="news-item">🛫 В наш флот добавлен новый Airbus A350-1000!</div>
+        </div>
+    </div>
+    <script>
+        let index = 0;
+        function showNews() {
+            const newsItems = document.querySelectorAll(".news-item");
+            newsItems.forEach(item => item.style.display = "none");
+            index = (index + 1) % newsItems.length;
+            newsItems[index].style.display = "block";
+        }
+        setInterval(showNews, 3000);
+        showNews();
+    </script>
+    <style>
+        .news-container { text-align: center; padding: 20px; background: #002a10; border-radius: 10px; margin: 20px; }
+        .news-slider { height: 40px; overflow: hidden; }
+        .news-item { font-size: 18px; display: none; color: #00ff88; }
+    </style>
+</body>
+</html>
+
 
