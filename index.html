@@ -15,9 +15,11 @@
         .container { text-align: center; padding: 40px; }
         .search-box { background: white; color: black; padding: 20px; border-radius: 10px; display: inline-block; }
         select, input, button { margin: 10px; padding: 10px; font-size: 16px; }
-        .btn-buy { display: none; margin-top: 20px; padding: 10px 20px; font-size: 18px; background-color: #00ff88; color: black; border: none; cursor: pointer; }
-        .btn-buy:hover { background-color: #00cc66; }
-        .aircraft-info { display: none; margin-top: 20px; padding: 20px; background-color: #003d14; color: #00ff88; border-radius: 10px; }
+        .news-container { text-align: center; padding: 20px; background: #002a10; border-radius: 10px; margin: 20px; }
+        .news-slider { height: 40px; overflow: hidden; }
+        .news-item { font-size: 18px; display: none; color: white; }
+        #buyButton { margin-top: 20px; padding: 10px 20px; font-size: 18px; background-color: #00cc66; color: white; border: none; border-radius: 5px; text-decoration: none; display: inline-block; }
+        #buyButton:hover { background-color: #00a654; }
     </style>
 </head>
 <body>
@@ -39,7 +41,6 @@
                 <option>Санкт-Петербург (LED)</option>
                 <option>Анталья (AYT)</option>
                 <option>Стамбул (IST)</option>
-                <option>Бангкок (BKK)</option>
                 <option>Хельсинки (HEL)</option>
                 <option>Майами (MIA)</option>
                 <option>Шанхай (PVG)</option>
@@ -47,60 +48,37 @@
                 <option>Мадрид (MAD)</option>
             </select>
             <select id="to">
-                <option>Москва (SVO)</option>
                 <option>Санкт-Петербург (LED)</option>
-                <option>Анталья (AYT)</option>
-                <option>Стамбул (IST)</option>
-                <option>Бангкок (BKK)</option>
-                <option>Хельсинки (HEL)</option>
-                <option>Майами (MIA)</option>
+                <option>Москва (SVO)</option>
                 <option>Шанхай (PVG)</option>
                 <option>Дубай (DXB)</option>
+                <option>Бангкок (BKK)</option>
+                <option>Стамбул (IST)</option>
+                <option>Майами (MIA)</option>
                 <option>Мадрид (MAD)</option>
             </select>
             <input type="date" id="date">
             <button onclick="searchFlight()">Найти рейс</button>
         </div>
         <h3 id="searchResult"></h3>
-        <button class="btn-buy" id="buyTicketBtn" onclick="window.location.href='purchase.html'">Купить билет</button>
-
-        <!-- Блок для информации о самолете -->
-        <div class="aircraft-info" id="aircraftInfo">
-            <h3>Информация о самолете</h3>
-            <p>Информация о самолете будет добавлена позже.</p>
-        </div>
+        <a id="buyButton" href="purchase.html" style="display:none;">Купить билет</a>
     </div>
-    <script>
-        function searchFlight() {
-            const from = document.getElementById("from").value;
-            const to = document.getElementById("to").value;
-            const date = document.getElementById("date").value;
-            
-            // Показать результат поиска
-            if (date) {
-                document.getElementById("searchResult").innerText = `✅ Рейс: ${from} → ${to} на ${date}`;
-                // Показать кнопку "Купить билет"
-                document.getElementById("buyTicketBtn").style.display = "inline-block";
-                // Показать информацию о самолете
-                document.getElementById("aircraftInfo").style.display = "block";
-            } else {
-                document.getElementById("searchResult").innerText = "❌ Выберите дату!";
-                // Скрыть кнопку "Купить билет"
-                document.getElementById("buyTicketBtn").style.display = "none";
-                // Скрыть информацию о самолете
-                document.getElementById("aircraftInfo").style.display = "none";
-            }
-        }
-    </script>
+
+    <div class="container">
+        <h2>Самолёт</h2>
+        <p id="planeInfo">Информация о выбранном самолёте будет добавлена позже.</p>
+    </div>
+
     <div class="news-container">
         <h2>Новости AEROAL</h2>
         <div class="news-slider">
-            <div class="news-item" style="color: white;"> AEROAL открывает новый маршрут в Шанхай (PVG)</div>
-            <div class="news-item" style="color: white;"> В наш флот добавлен новый Airbus A350-1000</div>
-            <div class="news-item" style="color: white;"> В наш флот добавлен новый Airbus A330-300</div>
-            <div class="news-item" style="color: white;"> Представляем новый класс эконом, комфорт, бизнес и первый на всех самолетах AEROAL</div>
+            <div class="news-item">AEROAL открывает новый маршрут в Шанхай (PVG)</div>
+            <div class="news-item">В наш флот добавлен новый Airbus A350-1000</div>
+            <div class="news-item">В наш флот добавлен новый Airbus A330-300</div>
+            <div class="news-item">Представляем новый класс: эконом, комфорт, бизнес и первый на всех самолётах AEROAL</div>
         </div>
     </div>
+
     <script>
         let index = 0;
         function showNews() {
@@ -111,11 +89,58 @@
         }
         setInterval(showNews, 3000);
         showNews();
+
+        const flights = {
+            "Москва (SVO)": {
+                "Санкт-Петербург (LED)": "Airbus A321",
+                "Шанхай (PVG)": "Airbus A350-1000",
+                "Дубай (DXB)": "Boeing 787-9",
+            },
+            "Санкт-Петербург (LED)": {
+                "Шанхай (PVG)": "Airbus A350-900",
+                "Анталья (AYT)": "Airbus A330-300",
+            },
+            "Анталья (AYT)": {
+                "Бангкок (BKK)": "Boeing 787-9",
+                "Стамбул (IST)": "Airbus A220-300",
+            },
+            "Стамбул (IST)": {
+                "Майами (MIA)": "Airbus A380-800",
+            },
+            "Хельсинки (HEL)": {
+                "Мадрид (MAD)": "Airbus A330-300",
+                "Шанхай (PVG)": "Airbus A350-900",
+            },
+            "Майами (MIA)": {
+                "Шанхай (PVG)": "Boeing 777-300",
+            },
+            "Дубай (DXB)": {
+                "Бангкок (BKK)": "Boeing 777-300",
+                "Мадрид (MAD)": "Airbus A350-900",
+            },
+            "Бангкок (BKK)": {
+                "Шанхай (PVG)": "Boeing 787-9",
+            },
+            "Мадрид (MAD)": {
+                "Москва (SVO)": "Airbus A330-300",
+            },
+        };
+
+        function searchFlight() {
+            const from = document.getElementById("from").value;
+            const to = document.getElementById("to").value;
+            const date = document.getElementById("date").value;
+            const resultText = date ? `✅ Рейс: ${from} → ${to} на ${date}` : "❌ Выберите дату!";
+            document.getElementById("searchResult").innerText = resultText;
+            document.getElementById("buyButton").style.display = date ? "inline-block" : "none";
+
+            // Добавляем информацию о самолете
+            if (flights[from] && flights[from][to]) {
+                document.getElementById("planeInfo").innerText = `Самолёт: ${flights[from][to]}`;
+            } else {
+                document.getElementById("planeInfo").innerText = "Самолёт: Не найдено";
+            }
+        }
     </script>
-    <style>
-        .news-container { text-align: center; padding: 20px; background: #002a10; border-radius: 10px; margin: 20px; }
-        .news-slider { height: 40px; overflow: hidden; }
-        .news-item { font-size: 18px; display: none; color: #ffffff; }  /* Добавлен белый цвет для текста */
-    </style>
 </body>
 </html>
