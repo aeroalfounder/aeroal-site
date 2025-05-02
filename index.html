@@ -15,6 +15,9 @@
         .container { text-align: center; padding: 40px; }
         .search-box { background: white; color: black; padding: 20px; border-radius: 10px; display: inline-block; }
         select, input, button { margin: 10px; padding: 10px; font-size: 16px; }
+        .btn-buy { display: none; margin-top: 20px; padding: 10px 20px; font-size: 18px; background-color: #00ff88; color: black; border: none; cursor: pointer; }
+        .btn-buy:hover { background-color: #00cc66; }
+        .aircraft-info { display: none; margin-top: 20px; padding: 20px; background-color: #003d14; color: #00ff88; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -35,7 +38,7 @@
                 <option>Москва (SVO)</option>
                 <option>Санкт-Петербург (LED)</option>
                 <option>Анталья (AYT)</option>
-                <opton>Стамбул (IST)</opton>
+                <option>Стамбул (IST)</option>
                 <option>Бангкок (BKK)</option>
                 <option>Хельсинки (HEL)</option>
                 <option>Майами (MIA)</option>
@@ -47,7 +50,7 @@
                 <option>Москва (SVO)</option>
                 <option>Санкт-Петербург (LED)</option>
                 <option>Анталья (AYT)</option>
-                <opton>Стамбул (IST)</opton>
+                <option>Стамбул (IST)</option>
                 <option>Бангкок (BKK)</option>
                 <option>Хельсинки (HEL)</option>
                 <option>Майами (MIA)</option>
@@ -59,24 +62,43 @@
             <button onclick="searchFlight()">Найти рейс</button>
         </div>
         <h3 id="searchResult"></h3>
+        <button class="btn-buy" id="buyTicketBtn" onclick="window.location.href='purchase.html'">Купить билет</button>
+
+        <!-- Блок для информации о самолете -->
+        <div class="aircraft-info" id="aircraftInfo">
+            <h3>Информация о самолете</h3>
+            <p>Информация о самолете будет добавлена позже.</p>
+        </div>
     </div>
     <script>
         function searchFlight() {
             const from = document.getElementById("from").value;
             const to = document.getElementById("to").value;
             const date = document.getElementById("date").value;
-            document.getElementById("searchResult").innerText = date ? `✅ Рейс: ${from} → ${to} на ${date}` : "❌ Выберите дату!";
+            
+            // Показать результат поиска
+            if (date) {
+                document.getElementById("searchResult").innerText = `✅ Рейс: ${from} → ${to} на ${date}`;
+                // Показать кнопку "Купить билет"
+                document.getElementById("buyTicketBtn").style.display = "inline-block";
+                // Показать информацию о самолете
+                document.getElementById("aircraftInfo").style.display = "block";
+            } else {
+                document.getElementById("searchResult").innerText = "❌ Выберите дату!";
+                // Скрыть кнопку "Купить билет"
+                document.getElementById("buyTicketBtn").style.display = "none";
+                // Скрыть информацию о самолете
+                document.getElementById("aircraftInfo").style.display = "none";
+            }
         }
     </script>
-</body>
-</html>
-        <div class="news-container">
+    <div class="news-container">
         <h2>Новости AEROAL</h2>
         <div class="news-slider">
             <div class="news-item"> AEROAL открывает новый маршрут в Шанхай (PVG)</div>
             <div class="news-item"> В наш флот добавлен новый Airbus A350-1000</div>
             <div class="news-item"> В наш флот добавлен новый Airbus A330-300</div>
-            <div class="news-item"> Представляем новый класс эконом,комфорт,бизнес и первый на всех самолетах AEROAL</div>
+            <div class="news-item"> Представляем новый класс эконом, комфорт, бизнес и первый на всех самолетах AEROAL</div>
         </div>
     </div>
     <script>
@@ -97,6 +119,3 @@
     </style>
 </body>
 </html>
-
-
-
