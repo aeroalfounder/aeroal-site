@@ -1,202 +1,174 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AEROAL - Главная</title>
-  <style>
-    body { background-color: #004d1c; color: white; font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    header { background-color: #003d14; padding: 20px; text-align: center; font-size: 24px; display: flex; align-items: center; justify-content: center; }
-    header img { height: 50px; margin-right: 15px; }
-    header h1 { font-family: Impact, sans-serif; margin: 0; }
-    nav { display: flex; justify-content: center; padding: 10px; background: #002a10; }
-    nav a { color: white; text-decoration: none; margin: 15px; font-size: 18px; transition: 0.3s; }
-    nav a:hover { color: #00ff88; }
-    .container { text-align: center; padding: 40px; }
-    .search-box { background: white; color: black; padding: 20px; border-radius: 10px; display: inline-block; }
-    select, input, button { margin: 10px; padding: 10px; font-size: 16px; }
-    .news-container { text-align: center; padding: 20px; background: #002a10; border-radius: 10px; margin: 20px; }
-    .news-slider { height: 40px; overflow: hidden; }
-    .news-item { font-size: 18px; display: none; color: white; }
-    #planeBlock { display: none; margin-top: 20px; font-size: 18px; }
-    #buyButton { display: none; margin-top: 15px; padding: 10px 20px; font-size: 16px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEROAL - Главная</title>
+    <style>
+        body { background-color: #004d1c; color: white; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background-color: #003d14; padding: 20px; text-align: center; font-size: 24px; display: flex; align-items: center; justify-content: center; }
+        header img { height: 50px; margin-right: 15px; }
+        header h1 { font-family: Impact, sans-serif; margin: 0; }
+        nav { display: flex; justify-content: center; padding: 10px; background: #002a10; }
+        nav a { color: white; text-decoration: none; margin: 15px; font-size: 18px; transition: 0.3s; }
+        nav a:hover { color: #00ff88; }
+        .container { text-align: center; padding: 40px; }
+        .search-box { background: white; color: black; padding: 20px; border-radius: 10px; display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 10px; }
+        select, input, button, label { margin: 0; padding: 10px; font-size: 16px; }
+        .search-box label { display: flex; flex-direction: column; align-items: flex-start; white-space: nowrap; }
+        .news-container { text-align: center; padding: 20px; background: #002a10; border-radius: 10px; margin: 20px; }
+        .news-slider { height: 40px; overflow: hidden; }
+        .news-item { font-size: 18px; display: none; color: white; }
+        .flight-details { margin-top: 20px; }
+        .price-block { margin-top: 10px; font-size: 18px; }
+        .aircraft-info { margin-top: 10px; }
+        .buy-button { margin-top: 15px; display: inline-block; padding: 10px 20px; background: #00ff88; color: black; text-decoration: none; border-radius: 5px; font-weight: bold; }
+    </style>
 </head>
 <body>
-  <header>
-    <img src="A.png" alt="Логотип AEROAL" />
-    <h1>AEROAL</h1>
-  </header>
-
-  <nav>
-    <a href="flights.html">Рейсы</a>
-    <a href="fleet.html">Флот</a>
-    <a href="checkin.html">Регистрация</a>
-    <a href="purchase.html">Купить билет</a>
-  </nav>
-
-  <div class="container">
-    <h2>Поиск рейсов</h2>
-    <div class="search-box">
-      <select id="from">
-        <option>Москва (SVO)</option>
-        <option>Санкт-Петербург (LED)</option>
-        <option>Анталья (AYT)</option>
-        <option>Стамбул (IST)</option>
-        <option>Бангкок (BKK)</option>
-        <option>Хельсинки (HEL)</option>
-        <option>Майами (MIA)</option>
-        <option>Шанхай (PVG)</option>
-        <option>Дубай (DXB)</option>
-        <option>Мадрид (MAD)</option>
-      </select>
-      <select id="to">
-        <option>Москва (SVO)</option>
-        <option>Санкт-Петербург (LED)</option>
-        <option>Анталья (AYT)</option>
-        <option>Стамбул (IST)</option>
-        <option>Бангкок (BKK)</option>
-        <option>Хельсинки (HEL)</option>
-        <option>Майами (MIA)</option>
-        <option>Шанхай (PVG)</option>
-        <option>Дубай (DXB)</option>
-        <option>Мадрид (MAD)</option>
-      </select>
-      <select id="class">
-        <option>Эконом</option>
-        <option>Комфорт</option>
-        <option>Бизнес</option>
-        <option>Первый</option>
-      </select>
-      <input type="date" id="date" />
-      <button onclick="searchFlight()">Найти рейс</button>
+    <header>
+        <img src="A.png" alt="Логотип AEROAL">
+        <h1>AEROAL</h1>
+    </header>
+    <nav>
+        <a href="flights.html">Рейсы</a>
+        <a href="fleet.html">Флот</a>
+        <a href="checkin.html">Регистрация</a>
+        <a href="purchase.html">Купить билет</a>
+    </nav>
+    <div class="container">
+        <h2>Поиск рейсов</h2>
+        <div class="search-box">
+            <label>Откуда:
+                <select id="from">
+                    <option>Москва (SVO)</option>
+                    <option>Санкт-Петербург (LED)</option>
+                    <option>Анталья (AYT)</option>
+                    <option>Стамбул (IST)</option>
+                    <option>Бангкок (BKK)</option>
+                    <option>Хельсинки (HEL)</option>
+                    <option>Майами (MIA)</option>
+                    <option>Шанхай (PVG)</option>
+                    <option>Дубай (DXB)</option>
+                    <option>Мадрид (MAD)</option>
+                </select>
+            </label>
+            <label>Куда:
+                <select id="to">
+                    <option>Москва (SVO)</option>
+                    <option>Санкт-Петербург (LED)</option>
+                    <option>Анталья (AYT)</option>
+                    <option>Стамбул (IST)</option>
+                    <option>Бангкок (BKK)</option>
+                    <option>Хельсинки (HEL)</option>
+                    <option>Майами (MIA)</option>
+                    <option>Шанхай (PVG)</option>
+                    <option>Дубай (DXB)</option>
+                    <option>Мадрид (MAD)</option>
+                </select>
+            </label>
+            <label>Дата вылета:
+                <input type="date" id="date">
+            </label>
+            <label>Класс обслуживания:
+                <select id="class">
+                    <option>Эконом</option>
+                    <option>Комфорт</option>
+                    <option>Бизнес</option>
+                    <option>Первый класс</option>
+                </select>
+            </label>
+            <label>Взрослые:
+                <input type="number" id="adults" min="1" value="1">
+            </label>
+            <label>Дети:
+                <input type="number" id="children" min="0" value="0">
+            </label>
+            <button onclick="searchFlight()">Найти рейс</button>
+        </div>
+        <div class="flight-details" id="searchResult"></div>
     </div>
 
-    <h3 id="searchResult"></h3>
-    <div id="planeBlock">
-      <p id="planeInfo"></p>
+    <div class="news-container">
+        <h2>Новости AEROAL</h2>
+        <div class="news-slider">
+            <div class="news-item">AEROAL открывает новый маршрут в Шанхай (PVG)</div>
+            <div class="news-item">В наш флот добавлен новый Airbus A350-1000</div>
+            <div class="news-item">В наш флот добавлен новый Airbus A330-300</div>
+            <div class="news-item">Представляем новый класс: эконом, комфорт, бизнес и первый на всех самолетах AEROAL</div>
+        </div>
     </div>
-    <a href="purchase.html"><button id="buyButton">Купить билет</button></a>
-  </div>
 
-  <div class="news-container">
-    <h2>Новости AEROAL</h2>
-    <div class="news-slider">
-      <div class="news-item">AEROAL открывает новый маршрут в Шанхай (PVG)</div>
-      <div class="news-item">В наш флот добавлен новый Airbus A350-1000</div>
-      <div class="news-item">В наш флот добавлен новый Airbus A330-300</div>
-      <div class="news-item">Представляем новый класс: эконом, комфорт, бизнес и первый на всех самолётах AEROAL</div>
-    </div>
-  </div>
+    <script>
+        const aircraftRoutes = {
+            "SVO ⇄ LED": "Airbus A321",
+            "SVO ⇄ PVG": "Airbus A350-1000",
+            "SVO ⇄ DXB": "Boeing 787-9",
+            "LED ⇄ PVG": "Airbus A350-900",
+            "LED ⇄ AYT": "Airbus A330-300",
+            "AYT ⇄ BKK": "Boeing 787-9",
+            "AYT ⇄ IST": "Airbus A220-300",
+            "IST ⇄ MIA": "Airbus A380-800",
+            "HEL ⇄ MAD": "Airbus A330-300",
+            "HEL ⇄ PVG": "Airbus A350-900",
+            "MIA ⇄ PVG": "Boeing 777-300",
+            "DXB ⇄ BKK": "Boeing 777-300",
+            "DXB ⇄ MAD": "Airbus A350-900",
+            "BKK ⇄ PVG": "Boeing 787-9",
+            "MAD ⇄ SVO": "Airbus A330-300"
+        };
 
-  <script>
-    const flights = {
-      "Москва (SVO)": {
-        "Санкт-Петербург (LED)": "Airbus A321",
-        "Шанхай (PVG)": "Airbus A350-1000",
-        "Дубай (DXB)": "Boeing 787-9"
-      },
-      "Санкт-Петербург (LED)": {
-        "Шанхай (PVG)": "Airbus A350-900",
-        "Анталья (AYT)": "Airbus A330-300"
-      },
-      "Анталья (AYT)": {
-        "Бангкок (BKK)": "Boeing 787-9",
-        "Стамбул (IST)": "Airbus A220-300"
-      },
-      "Стамбул (IST)": {
-        "Майами (MIA)": "Airbus A380-800"
-      },
-      "Хельсинки (HEL)": {
-        "Мадрид (MAD)": "Airbus A330-300",
-        "Шанхай (PVG)": "Airbus A350-900"
-      },
-      "Майами (MIA)": {
-        "Шанхай (PVG)": "Boeing 777-300"
-      },
-      "Дубай (DXB)": {
-        "Бангкок (BKK)": "Boeing 777-300",
-        "Мадрид (MAD)": "Airbus A350-900"
-      },
-      "Бангкок (BKK)": {
-        "Шанхай (PVG)": "Boeing 787-9"
-      },
-      "Мадрид (MAD)": {
-        "Москва (SVO)": "Airbus A330-300"
-      }
-    };
+        const classPrices = {
+            "Эконом": { reais: 0, dollars: 0 },
+            "Комфорт": { reais: 100, dollars: 1.49 },
+            "Бизнес": { reais: 350, dollars: 4.99 },
+            "Первый класс": { reais: 750, dollars: 9.99 }
+        };
 
-    const pricesByRoute = {
-      "Москва (SVO) → Санкт-Петербург (LED)": { "Эконом": 100, "Комфорт": 150, "Бизнес": 250, "Первый": 400 },
-      "Москва (SVO) → Шанхай (PVG)": { "Эконом": 300, "Комфорт": 450, "Бизнес": 700, "Первый": 1100 },
-      "Москва (SVO) → Дубай (DXB)": { "Эконом": 250, "Комфорт": 380, "Бизнес": 600, "Первый": 950 },
-      "Санкт-Петербург (LED) → Шанхай (PVG)": { "Эконом": 290, "Комфорт": 430, "Бизнес": 690, "Первый": 1050 },
-      "Санкт-Петербург (LED) → Анталья (AYT)": { "Эконом": 180, "Комфорт": 270, "Бизнес": 420, "Первый": 700 },
-      "Анталья (AYT) → Бангкок (BKK)": { "Эконом": 280, "Комфорт": 420, "Бизнес": 680, "Первый": 980 },
-      "Анталья (AYT) → Стамбул (IST)": { "Эконом": 90, "Комфорт": 140, "Бизнес": 220, "Первый": 350 },
-      "Стамбул (IST) → Майами (MIA)": { "Эконом": 350, "Комфорт": 500, "Бизнес": 800, "Первый": 1200 },
-      "Хельсинки (HEL) → Мадрид (MAD)": { "Эконом": 200, "Комфорт": 300, "Бизнес": 450, "Первый": 700 },
-      "Хельсинки (HEL) → Шанхай (PVG)": { "Эконом": 320, "Комфорт": 480, "Бизнес": 750, "Первый": 1150 },
-      "Майами (MIA) → Шанхай (PVG)": { "Эконом": 400, "Комфорт": 600, "Бизнес": 950, "Первый": 1400 },
-      "Дубай (DXB) → Бангкок (BKK)": { "Эконом": 260, "Комфорт": 390, "Бизнес": 620, "Первый": 960 },
-      "Дубай (DXB) → Мадрид (MAD)": { "Эконом": 240, "Комфорт": 360, "Бизнес": 580, "Первый": 900 },
-      "Бангкок (BKK) → Шанхай (PVG)": { "Эконом": 220, "Комфорт": 330, "Бизнес": 520, "Первый": 800 },
-      "Мадрид (MAD) → Москва (SVO)": { "Эконом": 230, "Комфорт": 340, "Бизнес": 550, "Первый": 850 }
-    };
+        function searchFlight() {
+            const from = document.getElementById("from").value;
+            const to = document.getElementById("to").value;
+            const date = document.getElementById("date").value;
+            const selectedClass = document.getElementById("class").value;
+            const adults = parseInt(document.getElementById("adults").value);
+            const children = parseInt(document.getElementById("children").value);
 
-    function searchFlight() {
-      const from = document.getElementById("from").value;
-      const to = document.getElementById("to").value;
-      const date = document.getElementById("date").value;
-      const flightClass = document.getElementById("class").value;
-      const routeKey = `${from} → ${to}`;
-      const routePrices = pricesByRoute[routeKey];
-      let priceText = "";
+            if (!date) {
+                document.getElementById("searchResult").innerHTML = "❌ Выберите дату!";
+                return;
+            }
 
-      if (routePrices && routePrices[flightClass]) {
-        const usdBase = routePrices[flightClass];
-        const flightDate = new Date(date);
-        const today = new Date();
-        const daysBefore = Math.ceil((flightDate - today) / (1000 * 60 * 60 * 24));
-        let discount = 0;
-        if (daysBefore > 30) {
-          discount = 0.1;
+            const route = `${from.split(' ')[0]} ⇄ ${to.split(' ')[0]}`;
+            const reverseRoute = `${to.split(' ')[0]} ⇄ ${from.split(' ')[0]}`;
+            const aircraft = aircraftRoutes[route] || aircraftRoutes[reverseRoute] || "Самолет не найден";
+
+            const basePriceDollars = classPrices[selectedClass].dollars;
+            const basePriceReais = classPrices[selectedClass].reais;
+
+            const totalPriceDollars = basePriceDollars * adults + (basePriceDollars * 0.5 * children);
+            const totalPriceReais = basePriceReais * adults + (basePriceReais * 0.5 * children);
+
+            document.getElementById("searchResult").innerHTML = `
+                <div>✅ Рейс: ${from} → ${to} на ${date}</div>
+                <div class="aircraft-info">Самолет: ${aircraft}</div>
+                <div class="price-block">
+                    Класс: ${selectedClass}<br>
+                    Взрослых: ${adults}, Детей: ${children}<br>
+                    Цена: $${totalPriceDollars.toFixed(2)} / R$${totalPriceReais.toFixed(2)}
+                </div>
+                <a class="buy-button" href="purchase.html">Купить билет</a>
+            `;
         }
-        const finalUsd = usdBase * (1 - discount);
-        const finalRobux = Math.round(finalUsd * 8);
-        priceText = `Цена: $${finalUsd.toFixed(2)} | R$ ${finalRobux}`;
-        if (discount > 0) {
-          priceText += " (скидка 10%)";
+
+        let index = 0;
+        function showNews() {
+            const newsItems = document.querySelectorAll(".news-item");
+            newsItems.forEach(item => item.style.display = "none");
+            index = (index + 1) % newsItems.length;
+            newsItems[index].style.display = "block";
         }
-      } else {
-        priceText = "Цена: недоступна";
-      }
-
-      const resultText = date
-        ? `✅ Рейс: ${routeKey} на ${date}\nКласс: ${flightClass} | ${priceText}`
-        : "❌ Выберите дату!";
-
-      document.getElementById("searchResult").innerText = resultText;
-      document.getElementById("buyButton").style.display = date ? "inline-block" : "none";
-
-      const planeBlock = document.getElementById("planeBlock");
-      if (date && flights[from] && flights[from][to]) {
-        document.getElementById("planeInfo").innerText = `Самолёт: ${flights[from][to]}`;
-        planeBlock.style.display = "block";
-      } else {
-        planeBlock.style.display = "none";
-      }
-    }
-
-    let index = -1;
-    function showNews() {
-      const newsItems = document.querySelectorAll(".news-item");
-      newsItems.forEach(item => item.style.display = "none");
-      index = (index + 1) % newsItems.length;
-      newsItems[index].style.display = "block";
-    }
-    setInterval(showNews, 3000);
-    showNews();
-  </script>
+        setInterval(showNews, 3000);
+        showNews();
+    </script>
 </body>
 </html>
