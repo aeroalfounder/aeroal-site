@@ -1,174 +1,194 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AEROAL - Главная</title>
-    <style>
-        body { background-color: #004d1c; color: white; font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header { background-color: #003d14; padding: 20px; text-align: center; font-size: 24px; display: flex; align-items: center; justify-content: center; }
-        header img { height: 50px; margin-right: 15px; }
-        header h1 { font-family: Impact, sans-serif; margin: 0; }
-        nav { display: flex; justify-content: center; padding: 10px; background: #002a10; }
-        nav a { color: white; text-decoration: none; margin: 15px; font-size: 18px; transition: 0.3s; }
-        nav a:hover { color: #00ff88; }
-        .container { text-align: center; padding: 40px; }
-        .search-box { background: white; color: black; padding: 20px; border-radius: 10px; display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 10px; }
-        select, input, button, label { margin: 0; padding: 10px; font-size: 16px; }
-        .search-box label { display: flex; flex-direction: column; align-items: flex-start; white-space: nowrap; }
-        .news-container { text-align: center; padding: 20px; background: #002a10; border-radius: 10px; margin: 20px; }
-        .news-slider { height: 40px; overflow: hidden; }
-        .news-item { font-size: 18px; display: none; color: white; }
-        .flight-details { margin-top: 20px; }
-        .price-block { margin-top: 10px; font-size: 18px; }
-        .aircraft-info { margin-top: 10px; }
-        .buy-button { margin-top: 15px; display: inline-block; padding: 10px 20px; background: #00ff88; color: black; text-decoration: none; border-radius: 5px; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEROAL - Главная</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'SF Pro';
+      src: local('SF Pro'), url('https://fonts.cdnfonts.com/s/61404/SFPRODISPLAYREGULAR.woff') format('woff');
+    }
+    body {
+      font-family: 'SF Pro', Impact, sans-serif;
+      background: linear-gradient(to bottom, #003d18, #004d1c);
+      color: white;
+    }
+    label {
+      font-weight: normal;
+    }
+  </style>
 </head>
-<body>
-    <header>
-        <img src="A.png" alt="Логотип AEROAL">
-        <h1>AEROAL</h1>
-    </header>
-    <nav>
-        <a href="flights.html">Рейсы</a>
-        <a href="fleet.html">Флот</a>
-        <a href="checkin.html">Регистрация</a>
-        <a href="purchase.html">Купить билет</a>
-    </nav>
-    <div class="container">
-        <h2>Поиск рейсов</h2>
-        <div class="search-box">
-            <label>Откуда:
-                <select id="from">
-                    <option>Москва (SVO)</option>
-                    <option>Санкт-Петербург (LED)</option>
-                    <option>Анталья (AYT)</option>
-                    <option>Стамбул (IST)</option>
-                    <option>Бангкок (BKK)</option>
-                    <option>Хельсинки (HEL)</option>
-                    <option>Майами (MIA)</option>
-                    <option>Шанхай (PVG)</option>
-                    <option>Дубай (DXB)</option>
-                    <option>Мадрид (MAD)</option>
-                </select>
-            </label>
-            <label>Куда:
-                <select id="to">
-                    <option>Москва (SVO)</option>
-                    <option>Санкт-Петербург (LED)</option>
-                    <option>Анталья (AYT)</option>
-                    <option>Стамбул (IST)</option>
-                    <option>Бангкок (BKK)</option>
-                    <option>Хельсинки (HEL)</option>
-                    <option>Майами (MIA)</option>
-                    <option>Шанхай (PVG)</option>
-                    <option>Дубай (DXB)</option>
-                    <option>Мадрид (MAD)</option>
-                </select>
-            </label>
-            <label>Дата вылета:
-                <input type="date" id="date">
-            </label>
-            <label>Класс обслуживания:
-                <select id="class">
-                    <option>Эконом</option>
-                    <option>Комфорт</option>
-                    <option>Бизнес</option>
-                    <option>Первый класс</option>
-                </select>
-            </label>
-            <label>Взрослые:
-                <input type="number" id="adults" min="1" value="1">
-            </label>
-            <label>Дети:
-                <input type="number" id="children" min="0" value="0">
-            </label>
-            <button onclick="searchFlight()">Найти рейс</button>
-        </div>
-        <div class="flight-details" id="searchResult"></div>
+<body class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-green-950 text-white py-4 shadow-md">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <div class="flex items-center">
+        <img src="A.png" alt="Логотип AEROAL" class="h-10 mr-3">
+        <h1 class="text-2xl font-bold tracking-wide">AEROAL</h1>
+      </div>
+      <nav class="hidden md:flex space-x-6 text-lg">
+        <a href="#" class="hover:text-green-400">Главная</a>
+        <a href="#" class="hover:text-green-400">Расписание</a>
+        <a href="#" class="hover:text-green-400">Флот</a>
+        <a href="#" class="hover:text-green-400">Новости</a>
+        <a href="#" class="hover:text-green-400">Сотрудники</a>
+        <a href="#" class="hover:text-green-400">AEROAL Loyalty</a>
+        <a href="#" class="hover:text-green-400">Для бизнеса</a>
+      </nav>
+      <!-- Mobile burger -->
+      <button id="burger" class="md:hidden focus:outline-none">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
     </div>
-
-    <div class="news-container">
-        <h2>Новости AEROAL</h2>
-        <div class="news-slider">
-            <div class="news-item">AEROAL открывает новый маршрут в Шанхай (PVG)</div>
-            <div class="news-item">В наш флот добавлен новый Airbus A350-1000</div>
-            <div class="news-item">В наш флот добавлен новый Airbus A330-300</div>
-            <div class="news-item">Представляем новый класс: эконом, комфорт, бизнес и первый на всех самолетах AEROAL</div>
-        </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden bg-green-950 text-center py-2">
+      <a href="#" class="block py-1 hover:text-green-400">Главная</a>
+      <a href="#" class="block py-1 hover:text-green-400">Расписание</a>
+      <a href="#" class="block py-1 hover:text-green-400">Флот</a>
+      <a href="#" class="block py-1 hover:text-green-400">Новости</a>
+      <a href="#" class="block py-1 hover:text-green-400">Сотрудники</a>
+      <a href="#" class="block py-1 hover:text-green-400">AEROAL Loyalty</a>
+      <a href="#" class="block py-1 hover:text-green-400">Для бизнеса</a>
     </div>
+  </header>
 
-    <script>
-        const aircraftRoutes = {
-            "SVO ⇄ LED": "Airbus A321",
-            "SVO ⇄ PVG": "Airbus A350-1000",
-            "SVO ⇄ DXB": "Boeing 787-9",
-            "LED ⇄ PVG": "Airbus A350-900",
-            "LED ⇄ AYT": "Airbus A330-300",
-            "AYT ⇄ BKK": "Boeing 787-9",
-            "AYT ⇄ IST": "Airbus A220-300",
-            "IST ⇄ MIA": "Airbus A380-800",
-            "HEL ⇄ MAD": "Airbus A330-300",
-            "HEL ⇄ PVG": "Airbus A350-900",
-            "MIA ⇄ PVG": "Boeing 777-300",
-            "DXB ⇄ BKK": "Boeing 777-300",
-            "DXB ⇄ MAD": "Airbus A350-900",
-            "BKK ⇄ PVG": "Boeing 787-9",
-            "MAD ⇄ SVO": "Airbus A330-300"
-        };
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-b from-green-900 to-green-800 text-white py-20 px-4 text-center">
+    <div class="max-w-3xl mx-auto">
+      <img src="A.png" alt="AEROAL" class="mx-auto h-20 mb-4">
+      <h2 class="text-4xl md:text-5xl font-semibold mb-4">Fly. Serve. Lead.</h2>
+      <p class="text-lg md:text-xl mb-8">Современные рейсы с комфортом и надежностью</p>
 
-        const classPrices = {
-            "Эконом": { reais: 0, dollars: 0 },
-            "Комфорт": { reais: 100, dollars: 1.49 },
-            "Бизнес": { reais: 350, dollars: 4.99 },
-            "Первый класс": { reais: 750, dollars: 9.99 }
-        };
+      <!-- Search Box -->
+      <div class="bg-white text-black rounded-lg p-6 shadow-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
+        <div>
+          <label for="from">Откуда</label>
+          <select class="p-2 rounded border w-full" id="from">
+            <option>Москва (SVO)</option>
+            <option>Санкт-Петербург (LED)</option>
+            <option>Анталья (AYT)</option>
+            <option>Стамбул (IST)</option>
+            <option>Бангкок (BKK)</option>
+            <option>Хельсинки (HEL)</option>
+            <option>Майами (MIA)</option>
+            <option>Бристоль (BRS)</option>
+            <option>Лондон (LHR)</option>
+            <option>Шанхай (PVG)</option>
+            <option>Мадрид (MAD)</option>
+            <option>Дубай (DXB)</option>
+          </select>
+        </div>
+        <div>
+          <label for="to">Куда</label>
+          <select class="p-2 rounded border w-full" id="to">
+            <option>Москва (SVO)</option>
+            <option>Санкт-Петербург (LED)</option>
+            <option>Анталья (AYT)</option>
+            <option>Стамбул (IST)</option>
+            <option>Бангкок (BKK)</option>
+            <option>Хельсинки (HEL)</option>
+            <option>Майами (MIA)</option>
+            <option>Бристоль (BRS)</option>
+            <option>Лондон (LHR)</option>
+            <option>Шанхай (PVG)</option>
+            <option>Мадрид (MAD)</option>
+            <option>Дубай (DXB)</option>
+          </select>
+        </div>
+        <div>
+          <label for="date">Дата вылета</label>
+          <input type="date" class="p-2 rounded border w-full" id="date">
+        </div>
+        <div>
+          <label for="class">Класс</label>
+          <select class="p-2 rounded border w-full" id="class">
+            <option>Эконом</option>
+            <option>Комфорт</option>
+            <option>Бизнес</option>
+            <option>Первый класс</option>
+          </select>
+        </div>
+        <div>
+          <label for="adults">Взрослые</label>
+          <input type="number" class="p-2 rounded border w-full" id="adults" min="1" value="1">
+        </div>
+        <div>
+          <label for="children">Дети</label>
+          <input type="number" class="p-2 rounded border w-full" id="children" min="0" value="0">
+        </div>
+        <div class="sm:col-span-2 md:col-span-3 text-center">
+          <button id="searchButton" class="bg-green-700 text-white px-6 py-2 rounded hover:bg-green-600">Найти рейс</button>
+        </div>
+      </div>
 
-        function searchFlight() {
-            const from = document.getElementById("from").value;
-            const to = document.getElementById("to").value;
-            const date = document.getElementById("date").value;
-            const selectedClass = document.getElementById("class").value;
-            const adults = parseInt(document.getElementById("adults").value);
-            const children = parseInt(document.getElementById("children").value);
+      <div class="mt-4 text-white" id="searchResult"></div>
+    </div>
+  </section>
 
-            if (!date) {
-                document.getElementById("searchResult").innerHTML = "❌ Выберите дату!";
-                return;
-            }
+  <!-- Новости -->
+  <section class="bg-green-800 py-10 px-4 text-center">
+    <h2 class="text-3xl mb-4 font-semibold">Новости</h2>
+    <p class="max-w-2xl mx-auto text-lg">Следите за последними новостями и обновлениями авиакомпании AEROAL. Мы всегда стремимся к совершенству и делимся этим с вами!</p>
+  </section>
 
-            const route = `${from.split(' ')[0]} ⇄ ${to.split(' ')[0]}`;
-            const reverseRoute = `${to.split(' ')[0]} ⇄ ${from.split(' ')[0]}`;
-            const aircraft = aircraftRoutes[route] || aircraftRoutes[reverseRoute] || "Самолет не найден";
+  <!-- Footer -->
+  <footer class="bg-green-950 text-white py-6 mt-auto">
+    <div class="container mx-auto text-center space-y-2">
+      <div class="flex justify-center space-x-4">
+        <a href="#" class="hover:text-green-400">YouTube</a>
+        <a href="#" class="hover:text-green-400">Telegram</a>
+        <a href="#" class="hover:text-green-400">Discord</a>
+      </div>
+      <p class="text-sm">© 2025 AEROAL. Все права защищены.</p>
+    </div>
+  </footer>
 
-            const basePriceDollars = classPrices[selectedClass].dollars;
-            const basePriceReais = classPrices[selectedClass].reais;
+  <script>
+    document.getElementById('burger').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
 
-            const totalPriceDollars = basePriceDollars * adults + (basePriceDollars * 0.5 * children);
-            const totalPriceReais = basePriceReais * adults + (basePriceReais * 0.5 * children);
+    window.addEventListener('DOMContentLoaded', () => {
+      const paymentLinks = {
+        'Эконом': { stripe: 'https://stripe.com/economy', parcel: 'https://parcel.com/economy' },
+        'Комфорт': { stripe: 'https://stripe.com/comfort', parcel: 'https://parcel.com/comfort' },
+        'Бизнес': { stripe: 'https://stripe.com/business', parcel: 'https://parcel.com/business' },
+        'Первый класс': { stripe: 'https://stripe.com/first', parcel: 'https://parcel.com/first' }
+      };
 
-            document.getElementById("searchResult").innerHTML = `
-                <div>Рейс: ${from} → ${to} на ${date}</div>
-                <div class="aircraft-info">Самолет: ${aircraft}</div>
-                <div class="price-block">
-                    Класс: ${selectedClass}<br>
-                    Взрослых: ${adults}, Детей: ${children}<br>
-                    Цена: $${totalPriceDollars.toFixed(2)} / R$${totalPriceReais.toFixed(2)}
-                </div>
-                <a class="buy-button" href="purchase.html">Купить билет</a>
-            `;
+      document.getElementById('searchButton').addEventListener('click', () => {
+        const from = document.getElementById('from').value;
+        const to = document.getElementById('to').value;
+        const date = document.getElementById('date').value;
+        const cls = document.getElementById('class').value;
+        const adults = +document.getElementById('adults').value;
+        const children = +document.getElementById('children').value;
+
+        if (!date) {
+          document.getElementById('searchResult').innerText = '❌ Выберите дату!';
+          return;
         }
 
-        let index = 0;
-        function showNews() {
-            const newsItems = document.querySelectorAll(".news-item");
-            newsItems.forEach(item => item.style.display = "none");
-            index = (index + 1) % newsItems.length;
-            newsItems[index].style.display = "block";
-        }
-        setInterval(showNews, 3000);
-        showNews();
-    </script>
+        const total = (adults + children * 0.5) * (cls === 'Эконом' ? 100 : cls === 'Комфорт' ? 150 : cls === 'Бизнес' ? 300 : 500);
+        const { stripe, parcel } = paymentLinks[cls] || paymentLinks['Эконом'];
+
+        document.getElementById('searchResult').innerHTML = `
+          <div class="p-4 bg-white text-black rounded shadow">
+            ✅ Рейс: ${from} → ${to} на ${date}<br>
+            Класс: ${cls}<br>
+            Взрослых: ${adults}, Детей: ${children}<br>
+            Итого: $${total.toFixed(2)}<br>
+            <a href="${stripe}" class="inline-block mt-2 bg-green-700 text-white px-4 py-2 rounded mr-2">Оплатить Stripe</a>
+            <a href="${parcel}" class="inline-block mt-2 bg-gray-700 text-white px-4 py-2 rounded">Оплатить Parcel</a>
+          </div>
+        `;
+      });
+    });
+  </script>
 </body>
 </html>
