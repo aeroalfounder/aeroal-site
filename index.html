@@ -1,240 +1,182 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AEROAL — Fly. Serve. Lead.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: 'SF Pro Display', sans-serif;
-      background: linear-gradient(to bottom, #0b3707, #ffffff);
-      color: #000;
-      overflow-x: hidden;
-    }
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px;
-      background-color: transparent;
-    }
-    header h1 {
-      font-family: Impact, sans-serif;
-      color: white;
-      margin: 0;
-      font-size: 28px;
-    }
-    header img {
-      height: 40px;
-      margin-right: 10px;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(10px);
-      padding: 10px 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-size: 18px;
-      transition: color 0.3s ease;
-    }
-    nav a:hover {
-      color: #00ff88;
-    }
-    .hero {
-      text-align: center;
-      padding: 80px 20px 40px;
-      color: white;
-      animation: fadeIn 1.5s ease-out;
-    }
-    .hero h2 {
-      font-size: 40px;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 18px;
-      opacity: 0.8;
-    }
-    .search-box {
-      background: rgba(255,255,255,0.3);
-      backdrop-filter: blur(20px);
-      padding: 30px;
-      border-radius: 16px;
-      max-width: 800px;
-      margin: 40px auto;
-      animation: slideUp 1s ease-out;
-    }
-    .search-box label {
-      display: block;
-      text-align: left;
-      font-weight: 600;
-      margin-top: 10px;
-    }
-    .search-box input,
-    .search-box select,
-    .search-box button {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 5px;
-      border: none;
-      border-radius: 8px;
-    }
-    .search-box button {
-      background-color: #0b3707;
-      color: white;
-      margin-top: 20px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .search-box button:hover {
-      background-color: #09995e;
-    }
-    .news-section {
-      padding: 40px 20px;
-      background-color: white;
-      color: black;
-    }
-    .news-section h3 {
-      text-align: center;
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-    .news-card {
-      background: #f1f1f1;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 10px auto;
-      max-width: 700px;
-    }
-    .footer {
-      text-align: center;
-      padding: 30px;
-      background-color: #002a10;
-      color: white;
-    }
-    .footer-icons img {
-      width: 32px;
-      margin: 0 10px;
-    }
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(-20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes slideUp {
-      from {opacity: 0; transform: translateY(30px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEROAL - Главная</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0b3707, #ffffff);
+            color: #000;
+            font-family: 'SF Pro', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header img {
+            height: 50px;
+            margin-right: 15px;
+        }
+        header h1 {
+            font-family: Impact, sans-serif;
+            margin: 0;
+            color: #0b3707;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        nav a {
+            color: #0b3707;
+            text-decoration: none;
+            margin: 15px;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: #00aa55;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+        .search-box {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+        select, input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        #searchResult {
+            font-size: 20px;
+            color: #0b3707;
+            margin-bottom: 20px;
+        }
+        .payment-options {
+            display: none;
+            margin-top: 20px;
+        }
+        .payment-options h3 {
+            margin-bottom: 10px;
+        }
+        .payment-buttons img {
+            height: 40px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .payment-buttons img:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div style="display: flex; align-items: center;">
-      <img src="A.png" alt="Логотип AEROAL">
-      <h1>AEROAL</h1>
+    <header>
+        <img src="A.png" alt="Логотип AEROAL">
+        <h1>AEROAL</h1>
+    </header>
+    <nav>
+        <a href="flights.html">Рейсы</a>
+        <a href="fleet.html">Флот</a>
+        <a href="checkin.html">Регистрация</a>
+        <a href="purchase.html">Купить билет</a>
+    </nav>
+    <div class="container">
+        <h2>Поиск рейсов</h2>
+        <div class="search-box">
+            <select id="from">
+                <option>Москва (SVO)</option>
+                <option>Санкт-Петербург (LED)</option>
+                <option>Анталья (AYT)</option>
+                <option>Стамбул (IST)</option>
+                <option>Бангкок (BKK)</option>
+                <option>Хельсинки (HEL)</option>
+                <option>Майами (MIA)</option>
+                <option>Шанхай (PVG)</option>
+                <option>Дубай (DXB)</option>
+                <option>Мадрид (MAD)</option>
+            </select>
+            <select id="to">
+                <option>Москва (SVO)</option>
+                <option>Санкт-Петербург (LED)</option>
+                <option>Анталья (AYT)</option>
+                <option>Стамбул (IST)</option>
+                <option>Бангкок (BKK)</option>
+                <option>Хельсинки (HEL)</option>
+                <option>Майами (MIA)</option>
+                <option>Шанхай (PVG)</option>
+                <option>Дубай (DXB)</option>
+                <option>Мадрид (MAD)</option>
+            </select>
+            <input type="date" id="date">
+            <button onclick="searchFlight()">Найти рейс</button>
+        </div>
+        <h3 id="searchResult"></h3>
+
+        <div class="payment-options" id="paymentOptions">
+            <h3>Выберите способ оплаты</h3>
+            <div class="payment-buttons">
+                <img src="usd.png" alt="$" onclick="redirectPayment('usd')">
+                <img src="robux.png" alt="R$" onclick="redirectPayment('robux')">
+                <img src="rub.png" alt="₽" onclick="redirectPayment('rub')">
+                <img src="eur.png" alt="€" onclick="redirectPayment('eur')">
+                <img src="yuan.png" alt="¥" onclick="redirectPayment('yen')">
+            </div>
+            <p id="paymentStatus"></p>
+        </div>
     </div>
-  </header>
+    <script>
+        function searchFlight() {
+            const from = document.getElementById("from").value;
+            const to = document.getElementById("to").value;
+            const date = document.getElementById("date").value;
+            const result = document.getElementById("searchResult");
+            const payment = document.getElementById("paymentOptions");
 
-  <nav>
-    <a href="index.html">Главная</a>
-    <a href="checkin.html">Онлайн регистрация</a>
-    <a href="loyalty.html">AEROAL Loyalty</a>
-    <a href="about.html">О нас</a>
-    <a href="business.html">Для бизнеса</a>
-  </nav>
+            if (date) {
+                result.innerText = `✅ Рейс: ${from} → ${to} на ${date}`;
+                payment.style.display = 'block';
+            } else {
+                result.innerText = "❌ Выберите дату!";
+                payment.style.display = 'none';
+            }
+        }
 
-  <div class="hero">
-    <h2>Fly. Serve. Lead</h2>
-    <p>Добро пожаловать на официальный сайт AEROAL</p>
-  </div>
-
-  <div class="search-box">
-    <label for="from">Откуда</label>
-    <select id="from">
-      <option>Москва (SVO)</option>
-      <option>Санкт-Петербург (LED)</option>
-      <option>Анталья (AYT)</option>
-      <option>Стамбул (IST)</option>
-      <option>Бангкок (BKK)</option>
-      <option>Хельсинки (HEL)</option>
-      <option>Майами (MIA)</option>
-      <option>Шанхай (PVG)</option>
-      <option>Дубай (DXB)</option>
-    </select>
-
-    <label for="to">Куда</label>
-    <select id="to">
-      <option>Москва (SVO)</option>
-      <option>Санкт-Петербург (LED)</option>
-      <option>Анталья (AYT)</option>
-      <option>Стамбул (IST)</option>
-      <option>Бангкок (BKK)</option>
-      <option>Хельсинки (HEL)</option>
-      <option>Майами (MIA)</option>
-      <option>Шанхай (PVG)</option>
-      <option>Дубай (DXB)</option>
-    </select>
-
-    <label for="date">Дата вылета</label>
-    <input type="date" id="date" />
-
-    <label for="class">Класс обслуживания</label>
-    <select id="class">
-      <option>Эконом</option>
-      <option>Комфорт</option>
-      <option>Бизнес</option>
-    </select>
-
-    <label for="passengers">Пассажиры</label>
-    <input type="number" id="passengers" min="1" max="10" value="1" />
-
-    <button onclick="searchFlight()">Найти рейс</button>
-  </div>
-
-  <div class="news-section">
-    <h3>Новости</h3>
-    <div class="news-card">🔔 AEROAL запускает прямые рейсы в Шанхай Пудун — наш новый международный хаб!</div>
-    <div class="news-card">✈️ Обновлён флот — теперь доступны Airbus A350-1000 и Boeing 787-9</div>
-    <div class="news-card">📣 AEROAL Loyalty: начисление бонусов за каждый полет!</div>
-  </div>
-
-  <div class="footer">
-    <p>Маршруты: Москва (SVO) • Шанхай (PVG) • Дубай (DXB)</p>
-    <div class="footer-icons">
-      <img src="discord.png" alt="Discord">
-      <img src="roblox.png" alt="Roblox">
-      <img src="youtube.png" alt="YouTube">
-    </div>
-    <p>&copy; 2025 AEROAL. Все права защищены.</p>
-  </div>
-
-  <script>
-    function searchFlight() {
-      const from = document.getElementById("from").value;
-      const to = document.getElementById("to").value;
-      const date = document.getElementById("date").value;
-      const cls = document.getElementById("class").value;
-      const pax = document.getElementById("passengers").value;
-      if (!date) {
-        alert("Пожалуйста, выберите дату вылета.");
-        return;
-      }
-      alert(`Рейс: ${from} → ${to}\nДата: ${date}\nКласс: ${cls}\nПассажиров: ${pax}`);
-    }
-  </script>
+        function redirectPayment(currency) {
+            document.getElementById("paymentStatus").innerText = "Checking for payment information...";
+            // Здесь вставить ссылки на реальные платёжные платформы по валюте
+            setTimeout(() => {
+                window.location.href = {
+                    usd: 'https://example.com/pay-usd',
+                    robux: 'https://roblox.com/robux',
+                    rub: 'https://example.com/pay-rub',
+                    eur: 'https://example.com/pay-eur',
+                    yuan: 'https://example.com/pay-yuan'
+                }[currency];
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
