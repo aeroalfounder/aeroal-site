@@ -5,91 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AEROAL - Главная</title>
     <style>
-        body {
-            background: linear-gradient(to bottom, #0b3707, #ffffff);
-            color: #000;
-            font-family: 'SF Pro', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        header img {
-            height: 50px;
-            margin-right: 15px;
-        }
-        header h1 {
-            font-family: Impact, sans-serif;
-            margin: 0;
-            color: #0b3707;
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-        nav a {
-            color: #0b3707;
-            text-decoration: none;
-            margin: 15px;
-            font-size: 18px;
-            transition: 0.3s;
-        }
-        nav a:hover {
-            color: #00aa55;
-        }
-        .container {
-            text-align: center;
-            padding: 40px;
-        }
-        .search-box {
-            background: white;
-            color: black;
-            padding: 20px;
-            border-radius: 20px;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            margin-bottom: 30px;
-        }
-        select, input, button {
-            margin: 10px;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-        #searchResult {
-            font-size: 20px;
-            color: #0b3707;
-            margin-bottom: 20px;
-        }
-        .payment-options {
-            display: none;
-            margin-top: 20px;
-        }
-        .payment-options h3 {
-            margin-bottom: 10px;
-        }
-        .payment-buttons img {
-            height: 40px;
-            margin: 0 10px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .payment-buttons img:hover {
-            transform: scale(1.1);
-        }
+        body { background: linear-gradient(to bottom, #0b3707, white); color: black; font-family: 'SF Pro', Arial, sans-serif; margin: 0; padding: 0; }
+        header { backdrop-filter: blur(10px); background-color: rgba(0, 0, 0, 0.4); padding: 20px; display: flex; align-items: center; justify-content: space-between; }
+        header img { height: 50px; margin-left: 15px; }
+        header h1 { font-family: Impact, sans-serif; color: white; margin: 0; font-size: 28px; }
+        nav { display: flex; justify-content: center; padding: 10px; background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); position: sticky; top: 0; }
+        nav a { color: white; text-decoration: none; margin: 15px; font-size: 18px; transition: 0.3s; }
+        nav a:hover { color: #00ff88; }
+        .container { padding: 40px 20px; max-width: 900px; margin: 0 auto; }
+        .search-box, .news-box, .footer { background: rgba(255, 255, 255, 0.9); border-radius: 20px; padding: 30px; margin-bottom: 40px; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        select, input, button { margin: 10px; padding: 10px; font-size: 16px; border-radius: 10px; border: 1px solid #ccc; }
+        h2, h3 { color: #004d1c; }
+        .payment-options { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .payment-options img { width: 50px; height: 50px; cursor: pointer; transition: 0.3s; }
+        .payment-options img:hover { transform: scale(1.1); }
+        .news-item { margin-bottom: 20px; }
+        .footer { text-align: center; font-size: 14px; color: #333; }
+        .footer img { width: 24px; margin: 0 5px; vertical-align: middle; }
     </style>
 </head>
 <body>
@@ -98,14 +30,17 @@
         <h1>AEROAL</h1>
     </header>
     <nav>
-        <a href="flights.html">Рейсы</a>
-        <a href="fleet.html">Флот</a>
-        <a href="checkin.html">Регистрация</a>
-        <a href="purchase.html">Купить билет</a>
+        <a href="index.html">Главная</a>
+        <a href="checkin.html">Онлайн регистрация</a>
+        <a href="loyalty.html">AEROAL Loyalty</a>
+        <a href="about.html">О нас</a>
+        <a href="business.html">Для бизнеса</a>
     </nav>
+
     <div class="container">
-        <h2>Поиск рейсов</h2>
         <div class="search-box">
+            <h2>Поиск рейсов</h2>
+            <label>Откуда:</label>
             <select id="from">
                 <option>Москва (SVO)</option>
                 <option>Санкт-Петербург (LED)</option>
@@ -118,6 +53,7 @@
                 <option>Дубай (DXB)</option>
                 <option>Мадрид (MAD)</option>
             </select>
+            <label>Куда:</label>
             <select id="to">
                 <option>Москва (SVO)</option>
                 <option>Санкт-Петербург (LED)</option>
@@ -130,52 +66,67 @@
                 <option>Дубай (DXB)</option>
                 <option>Мадрид (MAD)</option>
             </select>
+            <label>Дата вылета:</label>
             <input type="date" id="date">
+            <label>Класс:</label>
+            <select id="class">
+                <option>Эконом</option>
+                <option>Бизнес</option>
+                <option>Первый</option>
+            </select>
+            <label>Количество пассажиров:</label>
+            <input type="number" id="people" min="1" value="1">
+            <br>
             <button onclick="searchFlight()">Найти рейс</button>
-        </div>
-        <h3 id="searchResult"></h3>
-
-        <div class="payment-options" id="paymentOptions">
-            <h3>Выберите способ оплаты</h3>
-            <div class="payment-buttons">
-                <img src="usd.png" alt="$" onclick="redirectPayment('usd')">
-                <img src="robux.png" alt="R$" onclick="redirectPayment('robux')">
-                <img src="rub.png" alt="₽" onclick="redirectPayment('rub')">
-                <img src="eur.png" alt="€" onclick="redirectPayment('eur')">
-                <img src="yuan.png" alt="¥" onclick="redirectPayment('yen')">
+            <h3 id="searchResult"></h3>
+            <div class="payment-options" id="paymentOptions" style="display:none;">
+                <img src="usd.png" alt="$" onclick="window.open('https://stripe.com')">
+                <img src="robux.png" alt="R$" onclick="window.open('https://roblox.com')">
+                <img src="rub.png" alt="₽" onclick="window.open('https://example.com')">
+                <img src="eur.png" alt="€" onclick="window.open('https://example.com')">
+                <img src="yen.png" alt="¥" onclick="window.open('https://example.com')">
             </div>
-            <p id="paymentStatus"></p>
+        </div>
+
+        <div class="news-box">
+            <h2>Новости AEROAL</h2>
+            <div class="news-item">
+                <strong>Май 2025:</strong> AEROAL объявляет о новом хабе в Шанхае (PVG).
+            </div>
+            <div class="news-item">
+                <strong>Апрель 2025:</strong> Запущена новая программа лояльности AEROAL Loyalty.
+            </div>
+            <div class="news-item">
+                <strong>Март 2025:</strong> Обновлен флот — теперь доступны Airbus A350-1000 и Boeing 787-9.
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 AEROAL. Все права защищены.</p>
+            <p>
+                <img src="discord.png" alt="Discord">
+                <img src="roblox.png" alt="Roblox">
+                <img src="youtube.png" alt="YouTube">
+            </p>
         </div>
     </div>
+
     <script>
         function searchFlight() {
             const from = document.getElementById("from").value;
             const to = document.getElementById("to").value;
             const date = document.getElementById("date").value;
+            const flightClass = document.getElementById("class").value;
+            const people = document.getElementById("people").value;
             const result = document.getElementById("searchResult");
             const payment = document.getElementById("paymentOptions");
-
-            if (date) {
-                result.innerText = `✅ Рейс: ${from} → ${to} на ${date}`;
-                payment.style.display = 'block';
+            if (!date) {
+                result.innerText = "❌ Пожалуйста, выберите дату.";
+                payment.style.display = "none";
             } else {
-                result.innerText = "❌ Выберите дату!";
-                payment.style.display = 'none';
+                result.innerText = `✅ Рейс: ${from} → ${to} на ${date}, Класс: ${flightClass}, Пассажиров: ${people}`;
+                payment.style.display = "flex";
             }
-        }
-
-        function redirectPayment(currency) {
-            document.getElementById("paymentStatus").innerText = "Checking for payment information...";
-            // Здесь вставить ссылки на реальные платёжные платформы по валюте
-            setTimeout(() => {
-                window.location.href = {
-                    usd: 'https://example.com/pay-usd',
-                    robux: 'https://roblox.com/robux',
-                    rub: 'https://example.com/pay-rub',
-                    eur: 'https://example.com/pay-eur',
-                    yuan: 'https://example.com/pay-yuan'
-                }[currency];
-            }, 1000);
         }
     </script>
 </body>
