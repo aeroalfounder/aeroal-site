@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Энергосервис</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+@font-face {
+  font-family: "Golos Text";
+  src: url("fonts/Golos-Text_VF.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Golos Text";
+  src: url("fonts/Golos-Text_Medium.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body {
+  font-family: "Golos Text", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #fff;
+  background-color: #000;
+  overflow-x: hidden;
+}
+
+/* ===== Хедер ===== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  z-index: 1000;
+}
+
+header .logo {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 25px;
+  font-weight: 500;
+  transition: opacity .2s;
+}
+
+header nav a:hover {
+  opacity: 0.6;
+}
+
+/* ===== Секции ===== */
+section {
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 60px;
+  box-shadow: inset 0 -200px 200px rgba(0,0,0,0.5);
+  cursor: pointer;
+  transition: transform .3s ease, opacity .3s ease;
+}
+
+section:hover {
+  opacity: 0.9;
+  transform: scale(1.01);
+}
+
+section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: none;
+  z-index: 1;
+}
+
+section .content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+section .content h1 {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 15px;
+}
+
+section .content p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #f0f0f0;
+}
+
+section .content p strong {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+/* ===== Белый футер ===== */
+footer {
+  background: #fff;
+  color: #000;
+  padding: 70px 40px;
+  text-align: center;
+}
+
+footer p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+footer .socials a {
+  display: inline-block;
+  margin: 0 12px;
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity .2s;
+}
+
+footer .socials a:hover {
+  opacity: 0.6;
+}
+
+/* ===== Адаптив ===== */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 15px 20px;
+  }
+  header nav a {
+    margin: 8px;
+  }
+  section {
+    padding: 40px;
+    min-height: 80vh;
+  }
+  section .content h1 {
+    font-size: 30px;
+  }
+  section .content p {
+    font-size: 16px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">ЭНЕРГОСЕРВИС</div>
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="about.html">О компании</a>
+    <a href="services.html">Услуги</a>
+    <a href="contact.html">Контакты</a>
+  </nav>
+  <div class="lang-switcher">
+    <select id="languageSelect">
+      <option value="ru" selected>RU</option>
+      <option value="en">EN</option>
+    </select>
+  </div>
+</header>
+
+
+<!-- ======== Блоки (6 штук) ======== -->
+<a href="page1.html">
+<section style="background-image:url('1.jpg');">
+  <div class="content">
+    <h1>Раздел 1</h1>
+    <p><strong>Жирный текст.</strong> Краткое описание раздела, переход на первую страницу.</p>
+  </div>
+</section>
+</a>
+
+<a href="page2.html">
+<section style="background-image:url('2.jpg');">
+  <div class="content">
+    <h1>Раздел 2</h1>
+    <p><strong>Жирный текст.</strong> Второй блок, ссылка на вторую страницу.</p>
+  </div>
+</section>
+</a>
+
+<a href="page3.html">
+<section style="background-image:url('3.jpg');">
+  <div class="content">
+    <h1>Раздел 3</h1>
+    <p><strong>Жирный текст.</strong> Третий блок, переход на третью страницу.</p>
+  </div>
+</section>
+</a>
+
+<a href="page4.html">
+<section style="background-image:url('4.jpg');">
+  <div class="content">
+    <h1>Раздел 4</h1>
+    <p><strong>Жирный текст.</strong> Четвёртый блок, переход на четвёртую страницу.</p>
+  </div>
+</section>
+</a>
+
+<a href="page5.html">
+<section style="background-image:url('5.jpg');">
+  <div class="content">
+    <h1>Раздел 5</h1>
+    <p><strong>Жирный текст.</strong> Пятый блок, переход на пятую страницу.</p>
+  </div>
+</section>
+</a>
+
+<a href="page6.html">
+<section style="background-image:url('6.jpg');">
+  <div class="content">
+    <h1>Раздел 6</h1>
+    <p><strong>Жирный текст.</strong> Шестой блок, переход на шестую страницу.</p>
+  </div>
+</section>
+</a>
+
+<footer>
+  <p><strong>ООО "ЭНЕРГОСЕРВИС"</strong><br>
+  Email: info@energoserv.com | Телефон: +7 812 407-25-02</p>
+</footer>
+
+</body>
+</html>
